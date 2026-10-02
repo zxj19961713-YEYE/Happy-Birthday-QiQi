@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>生日惊喜</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:"Microsoft YaHei";
+    background:linear-gradient(135deg,#ffe0f0,#fff5cc);
+    text-align:center;
+    overflow-x:hidden;
+}
+
+.container{
+    padding:40px 20px;
+}
+
+h1{
+    color:#ff4d88;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.option{
+    background:#ffffff;
+}
+
+.correct{
+    background:#7dff9d;
+}
+
+.hidden{
+    display:none;
+}
+
+#gift{
+    font-size:120px;
+    animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+}
+
+#videoContainer{
+    margin-top:20px;
+}
+
+#message{
+    font-size:24px;
+    color:#ff4081;
+    margin-top:30px;
+    line-height:1.8;
+}
+
+.confetti{
+    position:fixed;
+    width:10px;
+    height:10px;
+    top:-10px;
+    animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div id="quiz">
+
+<h1>🎂 生日小测试 🎂</h1>
+
+<p>下面哪个答案是正确的？</p>
+
+<h2>我们第一次见面是在？</h2>
+
+<button class="option" onclick="wrong()">图书馆</button>
+<button class="option" onclick="wrong()">食堂</button>
+<button class="option" onclick="correct()">正确答案</button>
+
+<p id="hint"></p>
+
+</div>
+
+<div id="giftPage" class="hidden">
+
+<h1>答对啦！</h1>
+
+<div id="gift">🎁</div>
+
+<button onclick="openGift()">
+打开礼物
+</button>
+
+</div>
+
+<div id="videoPage" class="hidden">
+
+<h1>生日快乐！</h1>
+
+<div id="videoContainer">
+
+<video
+width="80%"
+controls
+autoplay>
+
+<source
+src="YOUR_VIDEO_LINK"
+type="video/mp4">
+
+</video>
+
+</div>
+
+<div id="message">
+
+亲爱的XXX：
+
+生日快乐！
+
+愿未来的每一天都有光、有爱、
+有值得期待的惊喜。
+
+希望这一岁能够被温柔以待，
+也希望我们还能一起创造更多回忆 ❤️
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function wrong(){
+    document.getElementById("hint").innerHTML=
+    "❌ 再想想哦～";
+}
+
+function correct(){
+
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("giftPage").classList.remove("hidden");
+
+}
+
+function openGift(){
+
+    document.getElementById("giftPage").classList.add("hidden");
+    document.getElementById("videoPage").classList.remove("hidden");
+
+    createConfetti();
+
+}
+
+function createConfetti(){
+
+    for(let i=0;i<80;i++){
+
+        let c=document.createElement("div");
+
+        c.className="confetti";
+
+        c.style.left=Math.random()*100+"vw";
+
+        c.style.background=
+        `hsl(${Math.random()*360},100%,60%)`;
+
+        c.style.animationDelay=
+        Math.random()*5+"s";
+
+        document.body.appendChild(c);
+    }
+}
+
+</script>
+
+</body>
+</html>
